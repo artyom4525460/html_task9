@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Screen</title>
+        <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=no">
+        <meta charset="utf-8">
+        <link href="./css/style.css" rel="stylesheet">
+    </head>
+    <body>
+        <section class="header">
+            <div class="title">
+                <div class="arrow-header">
+                    <img src="./images/arrow-left.svg" alt="arrow" onclick="alert('Return Button is working')">
+                </div>
+                <div class="title-text">Broadcast</div>
+            </div>
+            <div class="tabs">
+                <div class="tab active" onclick="alert('One Call Tab is working')">One Call</div>
+                <div class="tab" onclick="alert('Near Me Tab is working')">Near Me</div>
+                <div class="tab" onclick="alert('Promotions Tab is working')">Promotions</div>
+            </div>
+        </section>
+        <section class="user-info">
+            <div class="items">
+                <div class="item">
+                    <div class="item-logo">
+                        <img src="./images/avatar.png" alt="">
+                    </div>
+                    <div class="item-text">
+                        <div class="item-title">
+                            Name
+                        </div>
+                        <div class="item-info">
+                            Ali Usama
+                        </div>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="item-logo">
+                        <img src="./images/phone.png" alt="">
+                    </div>
+                    <div class="item-text">
+                        <div class="item-title">
+                            Phone#
+                        </div>
+                        <div class="item-info">
+                            03004124111
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="chat-section">
+            <div class="chat-block empty-chat">
+                Please type your query
+                <div class="chat-button">
+                    <button class="button primary-button disable" onclick="alert('Publish your request is working')">Publish your request</button>
+                </div>
+            </div>
+        </section>
+        <section class="bottom-controls">
+            <div class="chat-controls">
+                <a href="" class="button primary-button circle-button attachment-button" onclick="alert('Attachment Button is Working')">
+                    <img src="./images/clip.svg" alt="">
+                </a>
+                <input type="text" class="chat-input" placeholder="Type a query">
+                <a href="" class="button primary-button circle-button send-button" onclick="alert('Send Button is working')">
+                    <img src="./images/send.svg" alt="">
+                </a>
+            </div>
+        </section>
+
+    </body>
+</html>
