@@ -19,11 +19,14 @@ body {
 section {
   position: relative;
   width: 100%;
-  max-width: 640px;
+  max-width: 450px;
   margin: 0 auto;
   background-color: #fdfdfd;
   box-sizing: border-box;
   padding: 0 15px; }
+  @media screen and (min-width: 450px) {
+    section {
+      max-width: 375px; } }
 
 .shadow {
   position: fixed;

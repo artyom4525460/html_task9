@@ -2,8 +2,8 @@
     DEFAULT
 */
 
-$max-width: 640px;
-$max-mobile-width: 450px;
+$max-width: 450px;
+$max-mobile-width: 375px;
 
 /* colors: */
 
@@ -32,6 +32,9 @@ section {
     background-color: #fdfdfd;
     box-sizing: border-box;
     padding: 0 15px;
+    @media screen and (min-width: $max-width){
+        max-width: $max-mobile-width;
+    }
     
 }
 
