@@ -3,6 +3,13 @@
         "node-sass": "^4.7.2"
     },
     "scripts": {
-        "scss": "node-sass --watch scss -o css"
+        "scss": "node-sass --watch scss -o css",
+        "build": "webpack",
+        "watch": "webpack --watch --progress; node-sass --watch scss -o css"
+    },
+    "devDependencies": {
+        "node-sass": "^5.0.0",
+        "webpack": "^5.9.0",
+        "webpack-cli": "^4.2.0"
     }
 }

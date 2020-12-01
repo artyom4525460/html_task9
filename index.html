@@ -58,65 +58,47 @@
         </section>
         <section class="chat-section">
             <div class="chat-block">
-                <div class="item">
-                    <div class="attache video">
-                        <img src="./images/video.png" alt="">
-                        <div class="video-button-block">
-                            <div class="video-button" onclick="alert('Play Button Is working')">
-                                <img src="./images/play.svg" alt="">
-                            </div>
-                        </div>
-                    </div>
+                <div class="chat-container" id="chatScreen">
                 </div>
-                <div class="item">
-                    <div class="audio" onclick="alert('Playing the audio')">
-                        <div class="play-button" >
-                            <img src="./images/play.svg" alt="" >
-                        </div>
-                        <div class="scale">
-                            <div class="progress-line"></div>
-                            <div class="progress-button"></div>
-                            <div class="progress-time">0:10</div>
-                        </div>
-                    </div>
-                    <div class="time">4:24PM</div>
-                </div>
-                <div class="item">
-                    <div class="image">
-                        <img src="./images/image.png" alt="">
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="text">
-                        Lorem Ipsum is simply dummy text of the
-printing and typesetting industry. Lorem
-Ipsum has been the industry's.
-                    </div>
-                    <div class="time">4:24PM</div>
+                <div id="chatEmptyBlock" class="empty-chat">
+                    Please type your query
                 </div>
                 <div class="chat-button">
-                    <button class="button primary-button disable" onclick="alert('Publish your request is working')">Publish your request</button>
+                    <button class="button primary-button disable"  id="chatPublishRequest">Publish your request</button>
                 </div>
             </div>
         </section>
         <section class="bottom-controls">
             <div class="chat-controls">
-                <div class="record-input">
-                    <div class="record-info">
-                        <img src="./images/microphone-red.svg" alt="">
-                        05:14
-                    </div>
-                    <div class="record-text">Recording...</div>
-                </div>
-                
-                <a href="" class="button primary-button circle-button send-button" onclick="alert('Send Button is working')">
+                <input type="file" id="attacheInput" style="display:none">
+                <a href="" id="attacheInputLink" class="button primary-button circle-button attachment-button">
+                    <img src="./images/clip.svg" alt="">
+                </a>
+                <input type="text" id="messageInput" class="chat-input" placeholder="Type a query">
+                <button href="" class="button primary-button circle-button send-button" id="sendButton">
                     <img src="./images/send.svg" alt="">
-                </a>
-                <a href="" class="button red-button circle-button send-button" onclick="alert('Close Button is working')">
-                    <img src="./images/close-white.svg" alt="">
-                </a>
+                </button>
             </div>
         </section>
 
+
+        <section class="modal-section hide" id="modalBlock">
+            <div class="modal">
+                <div class="top-part">
+                    <div class="title">Are you sure?</div>
+                    <div class="text">It is a complate query</div>
+                </div>
+                <div class="buttons">
+                    <div class="modal-button" id="modalEditButton">
+                        Edit
+                    </div>
+                    <div class="modal-button" onclick="alert('BroadCast Button is Working')">
+                        Broadcast
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <script src="./js/script.js"></script>
     </body>
 </html>

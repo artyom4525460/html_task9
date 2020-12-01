@@ -59,7 +59,7 @@ section {
     box-sizing: border-box;
 }
 
-img {
+img, video, audio {
     max-width: 100%;
 }
 
@@ -79,4 +79,8 @@ a {
 
 .margin--3{
     margin-top: -3px;
+}
+
+.hide{
+    display: none !important;
 }
