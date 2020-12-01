@@ -119,10 +119,10 @@ let chat = {
                 alert('Please attache video, audio or image')
                 break;
         }
-        if(!chatEmptyBlock.classList.contains('hide')){
+        if(!chat.chatEmptyBlock.classList.contains('hide')){
             chat.hideChatEmptyBlock()
         }
-        if(!chat.chatPublishRequestButton.contains('disable')){
+        if(!chat.chatPublishRequestButton.classList.contains('disable')){
             chat.enablePublishRequest()
         }
     },
