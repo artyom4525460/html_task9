@@ -122,7 +122,7 @@ let chat = {
         if(!chatEmptyBlock.classList.contains('hide')){
             chat.hideChatEmptyBlock()
         }
-        if(!chat.chatPublishRequest.contains('disable')){
+        if(!chat.chatPublishRequestButton.contains('disable')){
             chat.enablePublishRequest()
         }
     },
