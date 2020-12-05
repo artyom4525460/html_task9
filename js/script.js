@@ -17,7 +17,37 @@ let chat = {
     chatScreen : document.getElementById('chatScreen'),
     sendButton : document.getElementById('sendButton'),
     messageInput : document.getElementById('messageInput'),
-    chatEmptyBlock: document.getElementById('chatEmptyBlock'),
+    chatEmptyBlock : document.getElementById('chatEmptyBlock'),
+
+    chatControls : document.getElementById('chatControls'),
+    audioControls : document.getElementById('audioControls'),
+
+    shadowBlock : document.getElementById('shadowBlock'),
+    bottomPanel : document.getElementById('bottomPanel'),
+    cameraButton : document.getElementById('cameraButton'),
+    audioButton : document.getElementById('audioButton'),
+    galleryButton : document.getElementById('galleryButton'),
+
+    hideBottomPanel : () => {
+        chat.bottomPanel.classList.add('hide')
+        chat.shadowBlock.classList.add('hide')
+        chat.attacheInputLink.classList.remove('active')
+    },
+    showBottomPanel : () => {
+        chat.bottomPanel.classList.remove('hide')
+        chat.shadowBlock.classList.remove('hide')
+        chat.attacheInputLink.classList.add('active')
+    },
+    hideAudioInput : () => {
+        chat.audioControls.classList.add('hide')
+        chat.chatControls.classList.remove('hide')
+    },
+    showAudioInput : () => {
+        chat.chatControls.classList.add('hide')
+        chat.audioControls.classList.remove('hide')
+        chat.hideBottomPanel()
+    },
+
     hideChatEmptyBlock : () => {
         chat.chatEmptyBlock.classList.add('hide')
     },
@@ -35,8 +65,9 @@ let chat = {
     },
     handleFiles : () => {
         let files = chat.attacheInput.files
+        chat.hideBottomPanel()
         if (!FileReader){
-            alert("Your browser doesn't suppport FileReader") 
+            alert("Your browser doesn't suppport FileReader")
         }
         if (FileReader && files && files.length) {
             let type = files[0].type.split('/')[0]
@@ -102,14 +133,14 @@ let chat = {
         `
     },
 
-    addSource : (type, data) => {
+    addSource : (type, data, fromStream = false) => {
         switch (type) {
             case 'video':
                 chat.addVideo(data)
                 break;
 
             case 'audio':
-                chat.addAudio(data)
+                chat.addAudio(data, fromStream)
                 break;
             
             case 'image':
@@ -123,7 +154,7 @@ let chat = {
         if(!chat.chatEmptyBlock.classList.contains('hide')){
             chat.hideChatEmptyBlock()
         }
-        if(!chat.chatPublishRequestButton.classList.contains('disable')){
+        if(chat.chatPublishRequestButton.classList.contains('disable')){
             chat.enablePublishRequest()
         }
     },
@@ -157,21 +188,28 @@ let chat = {
         }
     },
 
-    addAudio : (data) => {
-        let fr = new FileReader();
-        fr.readAsDataURL(data);
-        fr.onload = function () {
-            let audioId = 'audio-' + Math.floor(Math.random() * 1000)
-            let item = document.getElementById('item-' + audioId)
+    addAudio : (data, fromStream) => {
+        let audioId = 'audio-' + Math.floor(Math.random() * 1000)
+        let item = document.getElementById('item-' + audioId)
+        if(fromStream){
             new Promise( (resolve, reject) => {
-                //uploadingModal.onShow()
-                chat.chatScreen.innerHTML += chat.audioFileHtml(fr.result, audioId)
+                chat.chatScreen.innerHTML += chat.audioFileHtml(data, audioId)
                 resolve('ok')
             }).then(()=> {
-                let closeButton = document.getElementById('close-' + audioId)
-                let item = document.getElementById('item-' + audioId)
                 chatDeleteEventsUpdate()
             }) 
+        }
+        else{
+            let fr = new FileReader();
+            fr.readAsDataURL(data);
+            fr.onload = function () {
+                new Promise( (resolve, reject) => {
+                    chat.chatScreen.innerHTML += chat.audioFileHtml(fr.result, audioId)
+                    resolve('ok')
+                }).then(()=> {
+                    chatDeleteEventsUpdate()
+                }) 
+            }
         }
     },
 
@@ -243,18 +281,23 @@ function chatDeleteEventsUpdate(){
 modal.modalEditButton.addEventListener('click', modal.onHide)
 chat.chatPublishRequestButton.addEventListener('click', modal.onShow)
 
-/**
- * 
- * Chat Events
- * 
- */
-
 chat.attacheInputLink.addEventListener('click', function(e){
     e.preventDefault()
+    chat.showBottomPanel()
+})
+
+chat.galleryButton.addEventListener('click', function(e){
     chat.attacheInput.click()
 })
 
 chat.attacheInput.addEventListener("change", chat.handleFiles, false)
+
+chat.shadowBlock.addEventListener('click', chat.hideBottomPanel)
+
+chat.audioButton.addEventListener('click', function(e){
+    chat.showAudioInput()
+    audio.recordAudio()
+})
 
 chat.sendButton.addEventListener("click", function(){
     if(chat.messageInput.value){
@@ -264,3 +307,74 @@ chat.sendButton.addEventListener("click", function(){
         chat.messageInput.value = null
     }
 })
+
+var audioInterval
+
+const audio = {
+    chunks : [],
+    constraints : { audio: true },
+    sendButton : document.getElementById('sendAudioButton'),
+    audioRecordInput : document.getElementById('audioRecordInput'),
+    closeAudioButton : document.getElementById('closeAudioButton'),
+    audioRecordTime : document.getElementById('audioRecordTime'),
+
+    recordAudio : () => {
+        if (navigator.mediaDevices.getUserMedia) {
+            navigator.mediaDevices.getUserMedia(audio.constraints).then(audio.onSuccess, audio.onError)
+        }
+        else{
+            alert("You browser doesn't support getUserMedia")
+        }
+    },
+    startCountTime(){
+        let minutes = 0, seconds = 0, time = 0
+        audioInterval = setInterval(function() {
+            time++
+            minutes = Math.floor(time / 60)
+            seconds = time % 60
+            audioRecordTime.innerHTML = `${minutes < 10 ? '0' + minutes : minutes}:${seconds < 10 ? '0' + seconds : seconds}`
+        }, 1000);
+    },
+    stopCountTime(){
+        clearInterval(audioInterval)
+        audioRecordTime.innerHTML = '00:00'
+    },
+    onSuccess : (stream) => {
+        const mediaRecorder = new MediaRecorder(stream)
+        mediaRecorder.start()
+        audio.startCountTime()
+        let cancelAudio = false
+
+        audio.sendButton.onclick = function() {
+          mediaRecorder.stop()
+          audio.stopCountTime()
+        }
+
+        audio.closeAudioButton.onclick = function() {
+            cancelAudio = true
+            mediaRecorder.stop()
+            audio.stopCountTime()
+        }
+    
+        mediaRecorder.onstop = function(e) {
+            const blob = new Blob(audio.chunks, { 'type' : 'audio/ogg; codecs=opus' })
+            audio.chunks = []
+            if(!cancelAudio){
+                const audioURL = window.URL.createObjectURL(blob)
+                chat.addSource('audio', audioURL, true)
+            }
+            else{
+                cancelAudio = false
+            }
+            chat.hideAudioInput()
+        }
+    
+        mediaRecorder.ondataavailable = function(e) {
+          audio.chunks.push(e.data)
+        }
+    },
+    onError : (err) => {
+        console.log('The following error occured: ' + err)
+        chat.hideAudioInput()
+    },
+}

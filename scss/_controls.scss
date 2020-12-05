@@ -81,6 +81,16 @@ button{
     border-radius: 19px;
     background-color: #fff;
     border: 1px solid #eaeaea;
+    background-image: url('../images/clip.svg');
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    &.active{
+        background-image: url('../images/clip-blue.svg')
+    }
+    // object{
+    //     max-width: 100%;
+    //     pointer-events: none;
+    // }
 }
 
 .send-button{
@@ -166,13 +176,14 @@ input{
     padding: 12px 8px;
     justify-content: space-between;
     align-items: center;
-    .item{
+    .panel-item{
         width: 100px;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
         align-items: center;
-        .icon-block{
+        cursor: pointer;
+        .panel-icon-block{
             width: 42px;
             height: 42px;
             border-radius: 21px;
@@ -182,14 +193,14 @@ input{
             align-items: center;
             cursor: pointer;
         }
-        .text{
+        .panel-text{
             font-size: 16px;
             letter-spacing: 0px;
             line-height: 25px;
             color: #131313;
         }
     }
-    .line{
+    .panel-line{
         width: 1px;
         background-color: #f0f0f0;
         height: 71px;

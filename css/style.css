@@ -134,7 +134,12 @@ button {
   height: 36px;
   border-radius: 19px;
   background-color: #fff;
-  border: 1px solid #eaeaea; }
+  border: 1px solid #eaeaea;
+  background-image: url("../images/clip.svg");
+  background-repeat: no-repeat;
+  background-position: 50% 50%; }
+  .attachment-button.active {
+    background-image: url("../images/clip-blue.svg"); }
 
 input {
   width: 100%;
@@ -206,13 +211,14 @@ input {
   padding: 12px 8px;
   justify-content: space-between;
   align-items: center; }
-  .bottom-panel .item {
+  .bottom-panel .panel-item {
     width: 100px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    align-items: center; }
-    .bottom-panel .item .icon-block {
+    align-items: center;
+    cursor: pointer; }
+    .bottom-panel .panel-item .panel-icon-block {
       width: 42px;
       height: 42px;
       border-radius: 21px;
@@ -221,12 +227,12 @@ input {
       justify-content: center;
       align-items: center;
       cursor: pointer; }
-    .bottom-panel .item .text {
+    .bottom-panel .panel-item .panel-text {
       font-size: 16px;
       letter-spacing: 0px;
       line-height: 25px;
       color: #131313; }
-  .bottom-panel .line {
+  .bottom-panel .panel-line {
     width: 1px;
     background-color: #f0f0f0;
     height: 71px; }
@@ -245,46 +251,45 @@ input {
       color: #ffffff;
       font-size: 17px; }
 
-.user-info {
-  filter: drop-shadow(0px 8px 9px rgba(12, 20, 61, 0.06));
-  background-color: #ffffff; }
-  .user-info .items {
-    padding: 12px 0;
+.chat-section {
+  height: calc(100vh - 121px - 66px);
+  background-color: #fafaf8;
+  padding-bottom: 11px;
+  padding-right: 0px;
+  padding-left: 0px;
+  position: relative;
+  overflow-y: scroll; }
+  .chat-section .user-info-items {
+    padding: 12px 15px;
     display: flex;
-    justify-content: space-between; }
-    .user-info .items .item {
+    justify-content: space-between;
+    filter: drop-shadow(0px 8px 9px rgba(12, 20, 61, 0.06));
+    background-color: #ffffff; }
+    .chat-section .user-info-items .item {
       display: flex;
       flex-direction: row;
       align-items: center; }
-      .user-info .items .item-logo {
+      .chat-section .user-info-items .item-logo {
         width: 30px; }
-        .user-info .items .item-logo img {
+        .chat-section .user-info-items .item-logo img {
           max-width: 100%; }
-      .user-info .items .item-text {
+      .chat-section .user-info-items .item-text {
         margin-left: 10px; }
-      .user-info .items .item-title {
+      .chat-section .user-info-items .item-title {
         font-size: 10px;
         letter-spacing: 1px;
         color: #131313;
         font-weight: 500; }
-      .user-info .items .item-info {
+      .chat-section .user-info-items .item-info {
         font-size: 14px;
         letter-spacing: 1px;
         color: #2f88fc;
         font-weight: 500; }
-
-.chat-section {
-  height: calc(100vh - 121px - 57px - 66px);
-  background-color: #fafaf8;
-  padding-top: 11px;
-  padding-bottom: 11px;
-  position: relative;
-  overflow-y: scroll; }
   .chat-section .chat-block {
     position: relative;
     width: 100%;
-    min-height: 100%;
-    padding-bottom: 42px; }
+    min-height: calc( 100% - 57px);
+    padding: 11px 15px 42px; }
     .chat-section .chat-block .chat-container {
       width: 100%;
       height: 100%;
@@ -306,7 +311,7 @@ input {
     .chat-section .chat-block .chat-button {
       position: absolute;
       bottom: 0;
-      right: 0; }
+      right: 15px; }
     .chat-section .chat-block .item {
       margin-bottom: 12px;
       width: 241px;
@@ -375,13 +380,14 @@ input {
           position: absolute;
           bottom: -9px;
           left: -5px; }
-  .chat-section .bottom-panel-position {
-    position: absolute;
-    bottom: 0;
-    padding: 8px 16px;
-    z-index: 5;
-    left: 50%;
-    transform: translate(-50%, 0); }
+    .chat-section .chat-block .bottom-panel-position {
+      max-width: 100%;
+      position: absolute;
+      bottom: 0;
+      padding: 8px 16px;
+      z-index: 5;
+      left: 50%;
+      transform: translate(-50%, 0); }
 
 .bottom-controls {
   background-color: #fff; }

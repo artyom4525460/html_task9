@@ -26,8 +26,9 @@
                 <div class="tab" onclick="alert('Promotions Tab is working')">Promotions</div>
             </div>
         </section>
-        <section class="user-info">
-            <div class="items">
+        <section class="chat-section">
+            <div class="shadow hide" id="shadowBlock"></div>
+            <div class="user-info-items">
                 <div class="item">
                     <div class="item-logo">
                         <img src="./images/avatar.png" alt="">
@@ -55,8 +56,6 @@
                     </div>
                 </div>
             </div>
-        </section>
-        <section class="chat-section">
             <div class="chat-block">
                 <div class="chat-container" id="chatScreen">
                 </div>
@@ -66,21 +65,70 @@
                 <div class="chat-button">
                     <button class="button primary-button disable"  id="chatPublishRequest">Publish your request</button>
                 </div>
+                <div class="bottom-panel-position hide" id="bottomPanel">
+                    <div class="bottom-panel">
+                        <div class="panel-item" id="cameraButton">
+                            <div class="panel-icon-block">
+                                <img src="./images/camera.svg" alt="" class="margin--3">
+                            </div>
+                            <div class="panel-text">
+                                Camera
+                            </div>
+                        </div>
+                        <div class="panel-line"></div>
+                        <div class="panel-item" id="audioButton">
+                            <div class="panel-icon-block">
+                                <img src="./images/microphone.svg" alt="">
+                            </div>
+                            <div class="panel-text">
+                                Audio
+                            </div>
+                        </div>
+                        <div class="panel-line"></div>
+                        <div class="panel-item" id="galleryButton">
+                            <div class="panel-icon-block">
+                                <img src="./images/images.svg" alt="">
+                            </div>
+                            <div class="panel-text">
+                                Gallery
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
+
+
         </section>
         <section class="bottom-controls">
-            <div class="chat-controls">
+            <div class="chat-controls" id="chatControls">
                 <input type="file" id="attacheInput" style="display:none">
                 <a href="" id="attacheInputLink" class="button primary-button circle-button attachment-button">
-                    <img src="./images/clip.svg" alt="">
+                    <!-- <object
+                        type="image/svg"
+                        data="./images/clip.svg">
+                    </object> -->
                 </a>
                 <input type="text" id="messageInput" class="chat-input" placeholder="Type a query">
                 <button href="" class="button primary-button circle-button send-button" id="sendButton">
                     <img src="./images/send.svg" alt="">
                 </button>
             </div>
+            <div class="chat-controls hide" id="audioControls">
+                <div class="record-input" id="audioRecordInput">
+                    <div class="record-info">
+                        <img src="./images/microphone-red.svg" alt="">
+                        <span id="audioRecordTime">00:00</span>
+                    </div>
+                    <div class="record-text">Recording...</div>
+                </div>
+                <button href="" class="button primary-button circle-button send-button" id="sendAudioButton">
+                    <img src="./images/send.svg" alt="">
+                </button>
+                <button href="" class="button red-button circle-button send-button" id="closeAudioButton">
+                    <img src="./images/close-white.svg" alt="">
+                </button>
+            </div>
         </section>
-
 
         <section class="modal-section hide" id="modalBlock">
             <div class="modal">
